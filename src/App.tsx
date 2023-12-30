@@ -1,19 +1,8 @@
-import ImageUpload from '@/components/ImageUpload';
-import useSelectFile from './hooks/useSelectFile';
+import "./index.css"
+import ImageUpload from './components/ImageUpload';
 
 function App() {
-  const {error, imgsToSave, selectedImages} = useSelectFile()
-  console.log({imgsToSave, selectedImages})
-  console.log(imgsToSave)
-  return (
-    <>
-    <h1>{error.message}</h1>
-      <ImageUpload quality={1}
-        Content={<p>UPLOAD</p>}
-        deleteIcon={<p>DEL</p>}
-      />
-    </>
-  );
+  return <ImageUpload align='start' quality={100} limit={3} fileSizeLimit="200mb" />
 }
 
 export default App;

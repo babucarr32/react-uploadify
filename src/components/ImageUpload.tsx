@@ -1,72 +1,80 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
+import React from 'react' 
+import useSelectFile from '@/hooks/useSelectFile'
 
-import { useAtom } from 'jotai';
+import cn from "classnames"
 
-import cn from 'classnames';
+import Images from './Images'
+import ImageInput from './ImageInput'
+import DragAndDrop from './DragAndDrop'
 
-import useSelectFile from '../hooks/useSelectFile';
+import { ImageUploadType } from 'types'
 
-import { imagesToSave } from '../JotaiAtoms';
+const Content: React.FC<ImageUploadType> = ({ errorMessageClassName, text, quality, limit, fileSizeLimit }) => {
+  const {error, details} = useSelectFile()
+  console.log({details})
+  return (
+    <div className="flex flex-col justify-center items-center">
+      <div className="text-center">
+        {text ? <p>{text}</p> : <p className="text-xl text-gray-700">Drag and Drop image(s) here.</p>}
+        <p className={cn("text-red-500 text-sm py-1", errorMessageClassName)}>{error.message}</p>
+      </div>
+      <ImageInput
+        limit={limit}
+        quality={quality}
+        fileSizeLimit={fileSizeLimit}
+        content={
+          <div className='cursor-pointer px-[16px] py-[4px] bg-gray-500 hover:bg-gray-700 transition rounded-md text-white'>Browse</div>
+        }/>
+    </div>
+  )
+}
 
-export interface FileUploadType {
-  quality?: number
-  Content?: React.ReactNode;
-  className?: string;
-  deleteIcon?: React.ReactNode
+const DeleteIcon = () => {
+  return (
+    <svg
+      width="24"
+      fill="none"
+      height="24"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M18 6 6 18"/>
+      <path d="m6 6 12 12"/>
+    </svg>
+  )
+}
+
+const alignItems =  {
+  end: "justify-end",
+  start: "justify-start",
+  center: "justify-center",
 
 }
 
-const ImageUpload: React.FC<FileUploadType> = ({ className, quality, Content, deleteIcon }) => {
-  const {selectedImages, handleFileSelected, setSelectedImages} =
-    useSelectFile();
-  const [imgsToSave, setImgsToSave] = useAtom(imagesToSave);
-
-  const handleDeleteSelectedImage = (image: string) => {
-    const blobIndex = selectedImages.indexOf(image);
-    const filteredImgs = selectedImages.filter((img) => img !== image);
-    const filteredBlobs = [...imgsToSave].filter((_, i) => i !== blobIndex);
-    setSelectedImages(filteredImgs);
-    setImgsToSave(filteredBlobs);
-  };
-
+const ImageUpload: React.FC<ImageUploadType> = ({ align, className, deleteIcon, errorMessageClassName, imagesClassName, hideImages, limit, text, quality, fileSizeLimit }) => {
   return (
     <>
-      <input
-        hidden
-        multiple
-        type='file'
-        id='fileUpload'
-        className='w-52'
-        name='fileUpload'
-        onChange={(e) => handleFileSelected(e, quality)}
-      />
-      <label htmlFor='fileUpload'>{Content || "Upload"}</label>
-
-      {selectedImages.length > 0 && (
-        <div className='w-full h-full pt-2'>
-          <div className='flex items-start gap-2'>
-            {selectedImages.map((image: string, index:number) => (
-              <div
-                key={image}
-                className='relative w-20 h-15 md:w-28 md:h-20 border rounded-md overflow-hidden'
-              >
-                <img className='w-full h-full object-fill' src={image} alt='' />
-
-                <button
-                  type='button'
-                  onClick={() => handleDeleteSelectedImage(image)}
-                  className='absolute top-0 right-0 bg-gray-200 hover:bg-gray-200 rounded-full p-2 opacity-50 hover:opacity-100 transition'
-                >
-                  {deleteIcon || "X"}
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      <div className={cn("border border-dashed h-72 rounded-md p-4 m-4 relative text-gray-700 flex flex-col justify-center items-center", className)} >
+        <DragAndDrop className="w-full h-full border flex justify-center items-center"
+          quality={quality}
+          limit={limit}
+          content={
+            <Content
+              text={text}
+              limit={limit}
+              quality={quality} 
+              fileSizeLimit={fileSizeLimit} 
+              errorMessageClassName={errorMessageClassName}
+            />}
+        />
+      </div>
+      {!hideImages &&  <Images deleteIcon={deleteIcon || <DeleteIcon />} className={cn(align && alignItems[align], imagesClassName, "px-5")} imageClassName="w-52"/>}
     </>
-  );
-};
+  )
+}
 
-export default ImageUpload;
+export default ImageUpload

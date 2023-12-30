@@ -1,72 +1,109 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useEffect, useState } from 'react';
-import { atom, useAtom } from 'jotai';
+import React, { useEffect, useRef } from 'react';
+import { useAtom } from 'jotai';
 
-import { handleFileInputUpload } from '../../lib/uploadedFileHandlers';
+import { handleDragAndDropFileUpload, handleFileInputUpload } from '../../lib/uploadedFileHandlers';
 
-import { imagesToSave, uploadedPostImg } from '../JotaiAtoms';
+import { imagesToSave, jotaiDetails, jotaiError, jotaiFileLimit, jotaiLimitCount, jotaiImages } from '../JotaiAtoms';
+import { DetailsType, UseSelectFileReturnType } from 'types';
 
-interface ErrorType {
-  message: string
-}
 
-interface DetailsType {
-  size: number
-  type: string
-}
-
-interface UseSelectFileReturnType{
-  error: ErrorType;
-  imgsToSave: Blob[];
-  details: DetailsType[]
-  setSelectedImages: any;
-  selectedImages: string[]; 
-  handleFileSelected: (event: React.ChangeEvent<HTMLInputElement>, quality?: number) => void, 
-}
-
-const jotaiError = atom<ErrorType>({message: ""})
-const jotaiDetails = atom<any>({})
 
 const useSelectFile = (): UseSelectFileReturnType => {
-  const [imgsToSave, setImgsToSave] = useAtom(imagesToSave);
-  const [selectedImages, setSelectedImages] = useAtom(uploadedPostImg);
-  const [error, setError] = useAtom<ErrorType>(jotaiError)
-  const [details, setDetails] = useAtom<DetailsType[]>(jotaiDetails)
-
+  const [fileLimit] = useAtom(jotaiFileLimit)
+  const [error, setError] = useAtom(jotaiError)
+  const [details, setDetails] = useAtom(jotaiDetails)
+  const [images, setImages] = useAtom(jotaiImages);
+  const [blobImage, setBlobImage] = useAtom(imagesToSave);
+  const [limitCount, setLimitCount] = useAtom(jotaiLimitCount)
+  const ref = useRef(0)
+  
 
   useEffect(()=> {
     const handleSetDetails = () => {
-      const detailsArray = imgsToSave.map((img: Blob): DetailsType => {
+      const detailsArray = blobImage.map((img: Blob): DetailsType => {
         return({size: img.size, type:img.type})
       })
       setDetails(detailsArray);
     } 
     handleSetDetails()
-  }, [imgsToSave]);
+  }, [blobImage]);
 
-  async function handleFileSelected(
+  const handleSelectFile = async (
     event: React.ChangeEvent<HTMLInputElement>,
-    quality?: number
-  ) {
-    const result = await handleFileInputUpload(event, quality);
-    if (!result) setError({message: "Invalid image detected..."});
-
-    if (result) {
-      setError({message: ""})
-      const { images, reducedImageQuality } = result as any;
-      const newImage: string[] = [];
- 
-      setImgsToSave((imgs: any) => [...imgs, ...reducedImageQuality]);
-
-      if (Array.isArray(images)) {
-        const resultArray = Array.from(images) as string[];
-        newImage.push(...resultArray);
+    quality?: number,
+    limit: number = fileLimit,
+    fileSizeLimit: string = ""
+  ) => {
+      setLimitCount(limitCount + 1)
+      console.log(limitCount, limit)
+      if (limitCount <= limit){
+        const result = await handleFileInputUpload(event, quality, limit, fileSizeLimit);
+        if (typeof result == "string"){
+          setError({message: result});
+        }
+        else{
+          if (result) {
+        setError({message: ""})
+        const { images, reducedImageQuality } = result as any;
+        const newImage: string[] = [];
+        
+        setBlobImage((imgs: any) => [...imgs, ...reducedImageQuality]);
+        
+        if (Array.isArray(images)) {
+          const resultArray = Array.from(images) as string[];
+          newImage.push(...resultArray);
+        }
+        setImages((imgs) => [...imgs, ...newImage]);
+        }
       }
-      setSelectedImages((imgs) => [...imgs, ...newImage]);
+    }else{
+      setError({message: `A maximum of ${limit} images required.`});
+      if(images.length){
+        setLimitCount(images.length + 1)
+      }else{
+        setLimitCount(1)
+      }
     }
   }
-  return {selectedImages, handleFileSelected, setSelectedImages, error, imgsToSave, details};
+
+  const handleDropFile = async(ev: any, quality?: number, limit: number = fileLimit) => {
+    const fileCount = [...ev.dataTransfer.items].length
+    console.log(limitCount, {fileCount})
+    setLimitCount(limitCount + fileCount)
+    if (Math.max(limitCount, fileCount) <= limit){
+      const result = await handleDragAndDropFileUpload(ev, quality);
+      if (result){
+        setError({message: ""})
+        const { images, reducedImageQuality } = result as any;
+        setImages((imgs: any) => [...imgs, ...images]);
+        setBlobImage((imgs: any) => [...imgs, ...reducedImageQuality]);
+      }
+      else{
+        setError({message: result})
+      }
+    }else{
+      setError({message: `A maximum of ${limit} images required.`});
+      if(images.length){
+        setLimitCount(images.length + 1)
+      }else{
+        setLimitCount(1)
+      }
+    }
+  }
+
+  function deleteImage(index: number) {
+    const filteredImages = images.filter((_, idx) => idx !== index);
+    const newImage = blobImage;
+    newImage.splice(index, 1);
+    setBlobImage(newImage);
+    setImages([...filteredImages]);
+    setLimitCount(limitCount - 1)
+    setError({message: ""})
+  }
+
+  return {images, handleSelectFile, setImages, error, blobImage, setBlobImage, details, deleteImage, handleDropFile};
 };
 
 export default useSelectFile;

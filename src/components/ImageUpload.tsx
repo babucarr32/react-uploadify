@@ -56,10 +56,11 @@ const alignItems =  {
 }
 
 const ImageUpload: React.FC<ImageUploadType> = ({ align, className, deleteIcon, errorMessageClassName, imagesClassName, hideImages, limit, text, quality, fileSizeLimit }) => {
+  const {isDraggedOver} = useSelectFile()
   return (
     <>
-      <div className={cn("border border-dashed h-72 rounded-md p-4 m-4 relative text-gray-700 flex flex-col justify-center items-center", className)} >
-        <DragAndDrop className="w-full h-full border flex justify-center items-center"
+      <div className={cn("border-2 border-dashed h-72 rounded-md p-4 m-4 relative text-gray-700 flex flex-col justify-center items-center", className, isDraggedOver && "border-red-500 transition")} >
+        <DragAndDrop className="w-full h-full flex justify-center items-center"
           quality={quality}
           limit={limit}
           content={

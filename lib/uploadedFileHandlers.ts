@@ -2,7 +2,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent } from 'react';
 
-function handleImageValidation(selectedFile: any) {
+const validateHeader = (header: string) => {
+  if (header === "89504E47") {
+    return true;
+  } else if (header === "47494638") {
+    return true;
+  } else if (header.startsWith("FFD8")) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+const handleImageValidation = (selectedFile: any) => {
   return new Promise((resolve) => {
     if (selectedFile) {
       const fileReader = new FileReader();
@@ -14,18 +26,8 @@ function handleImageValidation(selectedFile: any) {
           .map((byte) => byte.toString(16))
           .join("")
           .toUpperCase();
-
-        if (header === "89504E47") {
-          resolve(true);
-        } else if (header === "47494638") {
-          resolve(true);
-        } else if (header.startsWith("FFD8")) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
+          resolve(validateHeader(header))
       };
-
       fileReader.readAsArrayBuffer(selectedFile);
     } else {
       resolve(false);
@@ -33,7 +35,7 @@ function handleImageValidation(selectedFile: any) {
   });
 }
 
-export function handleReduceImageQuality(file: Blob, quality?: number): Promise<Blob | boolean> {
+export const handleReduceImageQuality = async (file: Blob, quality?: number): Promise<Blob | boolean> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = function (event: ProgressEvent<FileReader>) {
@@ -93,7 +95,7 @@ const handleConvertSize = (value: string): number | any  => {
   return
 }
 
-export async function handleFileInputUpload(
+export const handleFileInputUpload = async (
   event: ChangeEvent<HTMLInputElement>,
   quality?: number,
   fileLimit: number = 100,
@@ -101,7 +103,7 @@ export async function handleFileInputUpload(
   ): Promise<{
     images: (string | ArrayBuffer | null | undefined)[]
     reducedImageQuality: Blob[] | []
-  } | string> {
+  } | string> => {
     const fileList = event.target.files;
     if (fileList) {
     const reducedImageQuality: Blob[] = [];
@@ -155,7 +157,7 @@ export async function handleFileInputUpload(
 }
 
 
-export async function handleDragAndDropFileUpload(ev: any, quality?: number) {
+export const handleDragAndDropFileUpload = async(ev: any, quality?: number) => {
   ev.preventDefault();
   const files: Blob[] = [];
   const filePromises = [...ev.dataTransfer.items].map((item, i) => {

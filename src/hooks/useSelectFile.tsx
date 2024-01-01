@@ -19,7 +19,7 @@ import {
   jotaiIsDraggedOver,
 } from "../JotaiAtoms";
 
-import { DetailsType, UseSelectFileReturnType, DataType } from "types";
+import { DetailsType, UseSelectFileReturnType, DataType } from "../types";
 
 const useSelectFile = (): UseSelectFileReturnType => {
   const [fileLimit] = useAtom(jotaiFileLimit);

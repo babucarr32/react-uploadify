@@ -12,7 +12,7 @@ import {
   jotaiIsDraggedOver,
 } from "@/JotaiAtoms";
 
-import { FileUploadType } from "../../types";
+import { FileUploadType } from "../types";
 
 export const UploadContext = createContext(null);
 

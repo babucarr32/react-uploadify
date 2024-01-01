@@ -4,7 +4,7 @@ import cn from "classnames";
 
 import useSelectFile from "@/hooks/useSelectFile";
 
-import { ImagesType } from "types";
+import { ImagesType } from "../types";
 
 const Images: React.FC<ImagesType> = ({
   className,

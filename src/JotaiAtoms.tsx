@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { atom } from "jotai";
 
-import { DetailsType, ErrorType } from "types";
+import { DetailsType, ErrorType } from "./types";
 
 export const imagesToSave = atom<Blob[]>([]);
 export const jotaiImages = atom<string[]>([]);

@@ -1,4 +1,4 @@
-import { UseImageUploadType } from "types";
+import { UseImageUploadType } from "../types";
 import useSelectFile from "./useSelectFile";
 
 const useImageUpload = (): UseImageUploadType => {

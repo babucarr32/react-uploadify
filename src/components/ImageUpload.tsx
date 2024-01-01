@@ -8,7 +8,7 @@ import DragAndDrop from "./DragAndDrop";
 
 import useSelectFile from "@/hooks/useSelectFile";
 
-import { ImageUploadType } from "types";
+import { ImageUploadType } from "../types";
 
 const Content: React.FC<ImageUploadType> = ({
   text,

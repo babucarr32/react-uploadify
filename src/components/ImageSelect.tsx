@@ -7,7 +7,7 @@ import { useAtom } from "jotai";
 import useSelectFile from "../hooks/useSelectFile";
 import { jotaiFileLimit, jotaiFileSizeLimit } from "@/JotaiAtoms";
 
-import { FileUploadType } from "../../types";
+import { FileUploadType } from "../types";
 
 const ImageSelect: React.FC<FileUploadType> = ({
   limit,

@@ -8,9 +8,9 @@ import DragAndDrop from "./DragAndDrop";
 
 import useSelectFile from "@/hooks/useSelectFile";
 
-import { ImageUploadType } from "../types";
+import { ContentType, ImageUploadType } from "../types";
 
-const Content: React.FC<ImageUploadType> = ({
+const Content: React.FC<ContentType> = ({
   text,
   limit,
   quality,
@@ -86,9 +86,11 @@ const ImageUpload: React.FC<ImageUploadType> = ({
   deleteIcon,
   hideImages,
   fileSizeLimit,
+  imageClassName,
   imagesClassName,
   selectClassName,
   errorMessageClassName,
+  deleteButtonClassName,
 }) => {
   const { isDraggedOver } = useSelectFile();
   return (
@@ -119,9 +121,10 @@ const ImageUpload: React.FC<ImageUploadType> = ({
       </div>
       {!hideImages && (
         <Images
+          imageClassName={imageClassName}
           deleteIcon={deleteIcon || <DeleteIcon />}
+          deleteButtonClassName={deleteButtonClassName}
           className={cn(align && alignItems[align], imagesClassName, "px-5")}
-          imageClassName="w-52"
         />
       )}
     </>

@@ -1,5 +1,5 @@
 {
-  "name": "react-image-upload",
+  "name": "react-uploadify",
   "author": "Baboucarr Badjie",
   "version": "0.0.1",
   "type": "module",
@@ -27,11 +27,12 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/babucarr32/react-image-upload.git/issues"
+    "url": "https://github.com/babucarr32/react-uploadify.git/issues"
   },
-  "homepage": "https://github.com/babucarr32/react-image-upload.git#readme",
+  "homepage": "https://github.com/babucarr32/react-uploadify.git#readme",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "dev": "vite",

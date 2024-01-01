@@ -1,20 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface FileUploadType {
+
+interface CommonType {
   limit?: number;
   quality?: number;
-  className?: string;
   fileSizeLimit?: string;
+}
+export interface ImageSelectType extends CommonType {
   content?: React.ReactNode;
 }
 
-export interface ImagesType extends FileUploadType {
+export interface DragAndDropType extends ImageSelectType {
+  className?: string;
+}
+export interface ImagesType {
+  className?: string;
   imageClassName?: string;
   deleteIcon?: React.ReactNode;
   deleteButtonClassName?: string;
-}
-
-export interface DragAndDropType {
-  quality?: number;
 }
 
 export interface ErrorType {
@@ -26,14 +28,9 @@ export interface DetailsType {
   type: string;
 }
 
-export interface UseSelectFileReturnType {
+export interface UseSelectFileReturnType extends UseImageUploadType {
   setImages: any;
-  images: string[];
-  error: ErrorType;
-  blobImages: Blob[];
   setBlobImages: any;
-  details: DetailsType[];
-  isDraggedOver: boolean;
   handleDropFile: (
     ev: any,
     quality?: number,
@@ -57,17 +54,22 @@ export interface UseImageUploadType {
   details: DetailsType[];
 }
 
-export interface ImageUploadType {
+export interface ContentType extends CommonType {
+  text?: string;
+  selectText?: string;
+  selectClassName?: string;
+  errorMessageClassName?: string;
+}
+export interface ImageUploadType
+  extends DragAndDropType,
+    ImagesType,
+    ImageSelectType {
   text?: string;
   limit?: number;
-  quality?: number;
-  className?: string;
   selectText?: string;
   hideImages?: boolean;
-  fileSizeLimit?: string;
   selectClassName?: string;
   imagesClassName?: string;
-  deleteIcon?: React.ReactNode;
   errorMessageClassName?: string;
   align?: "start" | "center" | "end";
 }

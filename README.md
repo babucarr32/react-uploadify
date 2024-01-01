@@ -1,8 +1,8 @@
 # Introduction
 
-`ReactImageUpload` is a flexible npm package that simplifies the process of uploading images from a user's device to a web browser. It offers a set of components and utilities to manage image uploads effectively within React applications.
+`ReactUploadify` is a flexible npm package that simplifies the process of uploading images from a user's device to a web browser. It offers a set of components and utilities to manage image uploads effectively within React applications.
 
-This package, `ReactImageUpload`, stands as a robust solution designed specifically to simplify the otherwise intricate task of enabling users to easily upload images from their personal devices directly to web browsers. Its primary goal is to simplify and optimize the image uploading process within React-based applications.
+This package, `ReactUploadify`, stands as a robust solution designed specifically to simplify the otherwise intricate task of enabling users to easily upload images from their personal devices directly to web browsers. Its primary goal is to simplify and optimize the image uploading process within React-based applications.
 
 The package accomplishes this through a collection of components and utilities that cater to various aspects of image uploads. By leveraging these components and utilities, developers can effortlessly integrate and manage image uploading functionalities within their React applications.
 
@@ -10,22 +10,22 @@ The components provided within this package, such as `DragAndDrop` and `ImageSel
 
 Additionally, the package includes the `ImageUpload` component, which combines the functionalities of both the `DragAndDrop` and `ImageSelect` components into a pre-designed UI, providing users with an all-in-one interface for image uploads.
 
-Additionally, `ReactImageUpload` isn't just about facilitating basic image uploads. It goes beyond by offering various features to enhance user experience and control over the uploading process. These include functionalities like providing a preview of selected images, allowing users to adjust image quality before uploading, setting specific file size limits to manage data volume, and defining the maximum number of images permitted for upload.
+Additionally, `ReactUploadify` isn't just about facilitating basic image uploads. It goes beyond by offering various features to enhance user experience and control over the uploading process. These include functionalities like providing a preview of selected images, allowing users to adjust image quality before uploading, setting specific file size limits to manage data volume, and defining the maximum number of images permitted for upload.
 
 Moreover, the package introduces a powerful utility named `useImageUpload`. This custom hook grants developers access to a suite of essential APIs that simplify the management of image uploads within functional components. Through this hook, developers can interact with key functionalities such as accessing the Blob object of uploaded images, retrieving additional details about the uploaded images, handling potential errors during the upload process, retrieving an array containing the uploaded images, and monitoring whether a file is being dragged over the designated drop area.
 
-Overall, `ReactImageUpload` stands as a comprehensive toolkit, providing easy and efficient means of integrating and managing image upload functionalities within React applications, enhancing user interaction, and streamlining the overall user experience.
+Overall, `ReactUploadify` stands as a comprehensive toolkit, providing easy and efficient means of integrating and managing image upload functionalities within React applications, enhancing user interaction, and streamlining the overall user experience.
 
 ## Installation
 
-You can install `ReactImageUpload` via npm:
+You can install `ReactUploadify` via npm:
 
 ```
-npm install react-image-upload
+npm install react-uploadify
 ```
 
 Add the following to the `content` of your `tailwind.config.js`
-`"./node_modules/react-image-upload/**/*.{js,ts,jsx,tsx}"`
+`"./node_modules/react-uploadify/**/*.{js,ts,jsx,tsx}"`
 It should look similar to the following.
 
 ```
@@ -34,7 +34,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/react-image-upload/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/react-uploadify/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
@@ -52,7 +52,7 @@ The `DragAndDrop` component provides an intuitive interface for users to drag an
 Example:
 
 ```
-import { DragAndDrop } from 'react-image-upload';
+import { DragAndDrop } from 'react-uploadify';
 
 const MyComponent = () => {
   return (
@@ -68,7 +68,7 @@ The `ImageSelect` component provides a file input for selecting images from the 
 Example:
 
 ```
-import { ImageSelect } from 'react-image-upload';
+import { ImageSelect } from 'react-uploadify';
 
 const MyComponent = () => {
   return (
@@ -84,7 +84,7 @@ The `ImageUpload` component combines the functionalities of both the `DragAndDro
 Example:
 
 ```
-import { ImageUpload } from 'react-image-upload';
+import { ImageUpload } from 'react-uploadify';
 
 const MyComponent = () => {
   return (
@@ -113,7 +113,7 @@ The `useImageUpload` hook exposes the following APIs:
 Example:
 
 ```
-import { useImageUpload } from 'react-image-upload';
+import { useImageUpload } from 'react-uploadify';
 
 const MyComponent = () => {
   const {
@@ -137,7 +137,7 @@ const MyComponent = () => {
 ### How to use the ImageSelect component.
 
 ```
-import { ImageSelect, useImageUpload, Images } from "react-image-upload";
+import { ImageSelect, useImageUpload, Images } from "react-uploadify";
 
 const DeleteIcon = () => {
   return (
@@ -205,7 +205,7 @@ export default App;
 ### How to use the DragAndDrop component.
 
 ```
-import { DragAndDrop, useImageUpload, Images } from "react-image-upload";
+import { DragAndDrop, useImageUpload, Images } from "react-uploadify";
 
 const DeleteIcon = () => {
   return (
@@ -278,7 +278,7 @@ export default App;
 ### How to use the ImageUpload component.
 
 ```
-import { ImageUpload } from "react-image-upload";
+import { ImageUpload } from "react-uploadify";
 
 const DeleteIcon = () => {
   return (

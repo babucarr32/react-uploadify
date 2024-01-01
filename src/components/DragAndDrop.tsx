@@ -12,11 +12,11 @@ import {
   jotaiIsDraggedOver,
 } from "@/JotaiAtoms";
 
-import { FileUploadType } from "../types";
+import { DragAndDropType } from "../types";
 
 export const UploadContext = createContext(null);
 
-const DragAndDrop: React.FC<FileUploadType> = ({
+const DragAndDrop: React.FC<DragAndDropType> = ({
   limit,
   quality,
   content,

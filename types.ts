@@ -38,6 +38,13 @@ export interface UseSelectFileReturnType{
   handleSelectFile: (event: React.ChangeEvent<HTMLInputElement>, quality?: number, limit?:number, fileSizeLimit?: string) => void, 
 }
 
+export interface UseImageUploadType {
+  images: string[]
+  error: ErrorType, 
+  blobImage: Blob[];
+  details: DetailsType[];
+}
+
 export interface ImageUploadType {
   text?: string
   limit?: number

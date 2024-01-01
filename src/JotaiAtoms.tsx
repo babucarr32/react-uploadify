@@ -8,5 +8,6 @@ export const jotaiImages = atom<string[]>([]);
 export const jotaiLimitCount = atom<number>(1);
 export const jotaiFileLimit = atom<number>(100);
 export const jotaiFileSizeLimit = atom<string>("");
+export const jotaiIsDraggedOver = atom<boolean>(false);
 export const jotaiError = atom<ErrorType>({message: ""})
 export const jotaiDetails = atom<DetailsType[]>([{type: "", size: 0}])

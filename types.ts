@@ -33,8 +33,9 @@ export interface UseSelectFileReturnType{
   blobImage: Blob[];
   setBlobImage: any;
   details: DetailsType[]
+  isDraggedOver: boolean,
   handleDropFile: (ev: any, quality?: number, limit?: number, fileSizeLimit?: string) => void
-  deleteImage: (index: number) => void
+  handleDeleteImage: (index: number) => void
   handleSelectFile: (event: React.ChangeEvent<HTMLInputElement>, quality?: number, limit?:number, fileSizeLimit?: string) => void, 
 }
 
@@ -56,4 +57,9 @@ export interface ImageUploadType {
   deleteIcon?: React.ReactNode;
   errorMessageClassName?: string
   align?: "start" | "center" | "end"
+}
+
+export type DataType =  string | {
+  reducedImageQuality: Blob[] | [];
+  images: (string | ArrayBuffer | null | undefined)[];
 }

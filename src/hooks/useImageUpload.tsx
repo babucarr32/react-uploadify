@@ -1,9 +1,9 @@
 import { UseImageUploadType } from "types";
-import useSelectFile from "./useSelectFile"
+import useSelectFile from "./useSelectFile";
 
 const useImageUpload = (): UseImageUploadType => {
-  const { blobImage, details, error, images } =useSelectFile();
-  return { blobImage, details, error, images }
-}
+  const { blobImage, details, error, images, isDraggedOver } = useSelectFile();
+  return { blobImage, details, error, images, isDraggedOver };
+};
 
-export default useImageUpload
+export default useImageUpload;

@@ -1,13 +1,18 @@
-import React from 'react'
+import React from "react";
 
-import cn from "classnames"
+import cn from "classnames";
 
-import useSelectFile from '@/hooks/useSelectFile'
+import useSelectFile from "@/hooks/useSelectFile";
 
-import { ImagesType } from 'types'
+import { ImagesType } from "types";
 
-const Images: React.FC<ImagesType> = ({ className, deleteIcon, deleteButtonClassName, imageClassName }) => {
-  const {images, handleDeleteImage} = useSelectFile()
+const Images: React.FC<ImagesType> = ({
+  className,
+  deleteIcon,
+  deleteButtonClassName,
+  imageClassName,
+}) => {
+  const { images, handleDeleteImage } = useSelectFile();
 
   return (
     <div className={cn("mt-3 flex gap-2 w-full", className)}>
@@ -17,14 +22,17 @@ const Images: React.FC<ImagesType> = ({ className, deleteIcon, deleteButtonClass
             <img className={cn("w-20", imageClassName)} src={image} />
             <button
               onClick={() => handleDeleteImage(index)}
-              className={cn("absolute top-0 right-0 bg-white opacity-50 hover:opacity-100 transition", deleteButtonClassName)}
+              className={cn(
+                "absolute top-0 right-0 bg-white opacity-50 hover:opacity-100 transition",
+                deleteButtonClassName
+              )}
             >
               {deleteIcon || "X"}
             </button>
           </div>
         ))}
     </div>
-  )
-}
+  );
+};
 
-export default Images
+export default Images;

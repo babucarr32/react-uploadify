@@ -2,10 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect } from 'react';
 
-import useSelectFile from '../hooks/useSelectFile';
-import { FileUploadType } from "../../types";
-import { jotaiFileLimit, jotaiFileSizeLimit } from '@/JotaiAtoms';
 import { useAtom } from 'jotai';
+
+import useSelectFile from '../hooks/useSelectFile';
+import { jotaiFileLimit, jotaiFileSizeLimit } from '@/JotaiAtoms';
+
+import { FileUploadType } from "../../types";
 
 const ImageInput: React.FC<FileUploadType> = ({ quality, content, limit, fileSizeLimit }) => {
   const {handleSelectFile} = useSelectFile();

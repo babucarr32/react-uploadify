@@ -1,5 +1,4 @@
 import React from 'react' 
-import useSelectFile from '@/hooks/useSelectFile'
 
 import cn from "classnames"
 
@@ -7,11 +6,12 @@ import Images from './Images'
 import ImageInput from './ImageInput'
 import DragAndDrop from './DragAndDrop'
 
+import useSelectFile from '@/hooks/useSelectFile'
+
 import { ImageUploadType } from 'types'
 
 const Content: React.FC<ImageUploadType> = ({ errorMessageClassName, text, quality, limit, fileSizeLimit }) => {
-  const {error, details} = useSelectFile()
-  console.log({details})
+  const {error} = useSelectFile()
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="text-center">

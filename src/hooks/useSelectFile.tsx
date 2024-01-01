@@ -37,7 +37,6 @@ const useSelectFile = (): UseSelectFileReturnType => {
     fileSizeLimit: string = ""
   ) => {
       setLimitCount(limitCount + 1)
-      console.log(limitCount, limit)
       if (limitCount <= limit){
         const result = await handleFileInputUpload(event, quality, limit, fileSizeLimit);
         if (typeof result == "string"){
@@ -45,32 +44,31 @@ const useSelectFile = (): UseSelectFileReturnType => {
         }
         else{
           if (result) {
-        setError({message: ""})
-        const { images, reducedImageQuality } = result as any;
-        const newImage: string[] = [];
-        
-        setBlobImage((imgs: any) => [...imgs, ...reducedImageQuality]);
-        
-        if (Array.isArray(images)) {
-          const resultArray = Array.from(images) as string[];
-          newImage.push(...resultArray);
+            setError({message: ""})
+            const { images, reducedImageQuality } = result as any;
+            const newImage: string[] = [];
+            
+            setBlobImage((imgs: any) => [...imgs, ...reducedImageQuality]);
+            
+            if (Array.isArray(images)) {
+              const resultArray = Array.from(images) as string[];
+              newImage.push(...resultArray);
+            }
+            setImages((imgs) => [...imgs, ...newImage]);
+          }
         }
-        setImages((imgs) => [...imgs, ...newImage]);
-        }
-      }
-    }else{
-      setError({message: `A maximum of ${limit} images required.`});
-      if(images.length){
-        setLimitCount(images.length + 1)
       }else{
-        setLimitCount(1)
+        setError({message: `A maximum of ${limit} images required.`});
+        if(images.length){
+          setLimitCount(images.length + 1)
+        }else{
+          setLimitCount(1)
+        }
       }
-    }
   }
 
   const handleDropFile = async(ev: any, quality?: number, limit: number = fileLimit) => {
     const fileCount = [...ev.dataTransfer.items].length
-    console.log(limitCount, {fileCount})
     setLimitCount(limitCount + fileCount)
     if (Math.max(limitCount, fileCount) <= limit){
       const result = await handleDragAndDropFileUpload(ev, quality);

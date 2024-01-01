@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useEffect } from "react";
+
 import { useAtom } from "jotai";
 
 import useSelectFile from "@/hooks/useSelectFile";
-import { FileUploadType } from "../../types";
 import { jotaiFileLimit, jotaiFileSizeLimit } from "@/JotaiAtoms";
+
+import { FileUploadType } from "../../types";
 
 export const UploadContext = createContext(null);
 
@@ -40,9 +42,7 @@ const DragAndDrop: React.FC<FileUploadType> = ({ quality, content, className, li
         onDragExit={() => {}}
       >{
           content ||
-          <div>
-            <p>Drag and Drop image(s) here.</p>
-          </div>
+          <div><p>Drag and Drop image(s) here.</p></div>
         }
       </div>
     </>

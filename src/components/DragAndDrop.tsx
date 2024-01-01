@@ -5,7 +5,7 @@ import { createContext, useEffect } from "react";
 import { useAtom } from "jotai";
 
 import useSelectFile from "@/hooks/useSelectFile";
-import { jotaiFileLimit, jotaiFileSizeLimit } from "@/JotaiAtoms";
+import { jotaiFileLimit, jotaiFileSizeLimit, jotaiIsDraggedOver } from "@/JotaiAtoms";
 
 import { FileUploadType } from "../../types";
 
@@ -15,6 +15,7 @@ const DragAndDrop: React.FC<FileUploadType> = ({ quality, content, className, li
   const { handleDropFile} = useSelectFile()
   const [fileLimit, setFileLimit] = useAtom(jotaiFileLimit)
   const [, setMaxFileSize] = useAtom(jotaiFileSizeLimit)
+  const [, setIsDraggedOver] = useAtom(jotaiIsDraggedOver);
 
 
   useEffect(() => {
@@ -37,9 +38,11 @@ const DragAndDrop: React.FC<FileUploadType> = ({ quality, content, className, li
           e.preventDefault()
         )}
         onDragOver={(e) => (
-          e.preventDefault()
+          e.preventDefault(),
+          setIsDraggedOver(true)
         )}
-        onDragExit={() => {}}
+        onDragExit={() => setIsDraggedOver(false)}
+        onDragLeave={() => setIsDraggedOver(false)}
       >{
           content ||
           <div><p>Drag and Drop image(s) here.</p></div>

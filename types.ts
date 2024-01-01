@@ -30,8 +30,8 @@ export interface UseSelectFileReturnType {
   setImages: any;
   images: string[];
   error: ErrorType;
-  blobImage: Blob[];
-  setBlobImage: any;
+  blobImages: Blob[];
+  setBlobImages: any;
   details: DetailsType[];
   isDraggedOver: boolean;
   handleDropFile: (
@@ -52,7 +52,7 @@ export interface UseSelectFileReturnType {
 export interface UseImageUploadType {
   images: string[];
   error: ErrorType;
-  blobImage: Blob[];
+  blobImages: Blob[];
   isDraggedOver: boolean;
   details: DetailsType[];
 }
@@ -62,8 +62,10 @@ export interface ImageUploadType {
   limit?: number;
   quality?: number;
   className?: string;
+  selectText?: string;
   hideImages?: boolean;
   fileSizeLimit?: string;
+  selectClassName?: string;
   imagesClassName?: string;
   deleteIcon?: React.ReactNode;
   errorMessageClassName?: string;

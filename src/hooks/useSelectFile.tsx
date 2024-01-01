@@ -26,26 +26,26 @@ const useSelectFile = (): UseSelectFileReturnType => {
   const [error, setError] = useAtom(jotaiError);
   const [images, setImages] = useAtom(jotaiImages);
   const [details, setDetails] = useAtom(jotaiDetails);
-  const [isDraggedOver] = useAtom(jotaiIsDraggedOver);
-  const [blobImage, setBlobImage] = useAtom(imagesToSave);
+  const [blobImages, setBlobImages] = useAtom(imagesToSave);
   const [limitCount, setLimitCount] = useAtom(jotaiLimitCount);
+  const [isDraggedOver, setIsDraggedOver] = useAtom(jotaiIsDraggedOver);
 
   useEffect(() => {
     const handleSetDetails = () => {
-      const detailsArray = blobImage.map((img: Blob): DetailsType => {
+      const detailsArray = blobImages.map((img: Blob): DetailsType => {
         return { size: img.size, type: img.type };
       });
       setDetails(detailsArray);
     };
     handleSetDetails();
-  }, [blobImage]);
+  }, [blobImages]);
 
   const handleSetErrorMessageAndImagesAndBlobs = (data: DataType) => {
     if (data) {
       setError({ message: "" });
       const { images, reducedImageQuality } = data as any;
       setImages((imgs: any) => [...imgs, ...images]);
-      setBlobImage((imgs: any) => [...imgs, ...reducedImageQuality]);
+      setBlobImages((imgs: any) => [...imgs, ...reducedImageQuality]);
     } else setError({ message: data });
   };
 
@@ -91,9 +91,10 @@ const useSelectFile = (): UseSelectFileReturnType => {
 
   const handleDeleteImage = (index: number) => {
     const filteredImages = images.filter((_, idx) => idx !== index);
-    const newImage = blobImage;
+    const newImage = blobImages;
     newImage.splice(index, 1);
-    setBlobImage(newImage);
+    setBlobImages(newImage);
+    setIsDraggedOver(false);
     setError({ message: "" });
     setLimitCount(limitCount - 1);
     setImages([...filteredImages]);
@@ -104,8 +105,8 @@ const useSelectFile = (): UseSelectFileReturnType => {
     images,
     details,
     setImages,
-    blobImage,
-    setBlobImage,
+    blobImages,
+    setBlobImages,
     isDraggedOver,
     handleDropFile,
     handleSelectFile,

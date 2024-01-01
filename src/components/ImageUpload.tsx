@@ -3,7 +3,7 @@ import React from "react";
 import cn from "classnames";
 
 import Images from "./Images";
-import ImageInput from "./ImageInput";
+import ImageSelect from "./ImageSelect";
 import DragAndDrop from "./DragAndDrop";
 
 import useSelectFile from "@/hooks/useSelectFile";
@@ -11,11 +11,13 @@ import useSelectFile from "@/hooks/useSelectFile";
 import { ImageUploadType } from "types";
 
 const Content: React.FC<ImageUploadType> = ({
-  errorMessageClassName,
   text,
-  quality,
   limit,
+  quality,
+  selectText,
   fileSizeLimit,
+  selectClassName,
+  errorMessageClassName,
 }) => {
   const { error } = useSelectFile();
   return (
@@ -30,13 +32,18 @@ const Content: React.FC<ImageUploadType> = ({
           {error.message}
         </p>
       </div>
-      <ImageInput
+      <ImageSelect
         limit={limit}
         quality={quality}
         fileSizeLimit={fileSizeLimit}
         content={
-          <div className="cursor-pointer px-[16px] py-[4px] bg-gray-500 hover:bg-gray-700 transition rounded-md text-white">
-            Browse
+          <div
+            className={cn(
+              "cursor-pointer px-[16px] py-[4px] bg-gray-500 hover:bg-gray-700 transition rounded-md text-white",
+              selectClassName
+            )}
+          >
+            {selectText || "Browse"}
           </div>
         }
       />
@@ -70,16 +77,18 @@ const alignItems = {
 };
 
 const ImageUpload: React.FC<ImageUploadType> = ({
-  align,
-  className,
-  deleteIcon,
-  errorMessageClassName,
-  imagesClassName,
-  hideImages,
-  limit,
   text,
+  align,
+  limit,
   quality,
+  className,
+  selectText,
+  deleteIcon,
+  hideImages,
   fileSizeLimit,
+  imagesClassName,
+  selectClassName,
+  errorMessageClassName,
 }) => {
   const { isDraggedOver } = useSelectFile();
   return (
@@ -100,7 +109,9 @@ const ImageUpload: React.FC<ImageUploadType> = ({
               text={text}
               limit={limit}
               quality={quality}
+              selectText={selectText}
               fileSizeLimit={fileSizeLimit}
+              selectClassName={selectClassName}
               errorMessageClassName={errorMessageClassName}
             />
           }

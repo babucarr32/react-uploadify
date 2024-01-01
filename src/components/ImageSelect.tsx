@@ -9,7 +9,7 @@ import { jotaiFileLimit, jotaiFileSizeLimit } from "@/JotaiAtoms";
 
 import { FileUploadType } from "../../types";
 
-const ImageInput: React.FC<FileUploadType> = ({
+const ImageSelect: React.FC<FileUploadType> = ({
   limit,
   quality,
   content,
@@ -47,4 +47,4 @@ const ImageInput: React.FC<FileUploadType> = ({
   );
 };
 
-export default ImageInput;
+export default ImageSelect;

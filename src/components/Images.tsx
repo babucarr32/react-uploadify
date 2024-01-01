@@ -9,29 +9,34 @@ import { ImagesType } from "types";
 const Images: React.FC<ImagesType> = ({
   className,
   deleteIcon,
-  deleteButtonClassName,
   imageClassName,
+  deleteButtonClassName,
 }) => {
   const { images, handleDeleteImage } = useSelectFile();
 
   return (
-    <div className={cn("mt-3 flex gap-2 w-full", className)}>
-      {images &&
-        images.map((image: string, index: number) => (
-          <div key={index} className="relative">
-            <img className={cn("w-20", imageClassName)} src={image} />
-            <button
-              onClick={() => handleDeleteImage(index)}
-              className={cn(
-                "absolute top-0 right-0 bg-white opacity-50 hover:opacity-100 transition",
-                deleteButtonClassName
-              )}
-            >
-              {deleteIcon || "X"}
-            </button>
-          </div>
-        ))}
-    </div>
+    <>
+      {images.length ? (
+        <div className={cn("mt-3 flex gap-2 w-full", className)}>
+          {images.map((image: string, index: number) => (
+            <div key={index} className="relative">
+              <img className={cn("w-20", imageClassName)} src={image} />
+              <button
+                onClick={() => handleDeleteImage(index)}
+                className={cn(
+                  "absolute top-0 right-0 bg-white opacity-50 hover:opacity-100 transition",
+                  deleteButtonClassName
+                )}
+              >
+                {deleteIcon || "X"}
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 

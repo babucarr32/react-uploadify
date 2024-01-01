@@ -163,7 +163,7 @@ function App() {
 
   const handleSaveImagesToDatabase = () => {
     blobImages
-    <!-- Your logic goes here -->
+    // Your logic goes here
   }
 
   return (
@@ -227,7 +227,13 @@ const DeleteIcon = () => {
 };
 
 function App() {
-  const { images, error, isDraggedOver } = useImageUpload();
+  const { images, error, isDraggedOver, blobImages } = useImageUpload();
+
+  const handleSaveImagesToDatabase = () => {
+    blobImages
+    // Your logic goes here
+  }
+
   return (
     <>
       {error.message && <h1 className="text-red-500">{error.message}</h1>}

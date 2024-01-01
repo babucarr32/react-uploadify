@@ -17,16 +17,19 @@
     "UI",
     "npm",
     "react",
-    "Design"
+    "Design",
+    "File",
+    "Upload",
+    "Image"
   ],
   "files": [
     "/dist"
   ],
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/babucarr32/react-image-upload.git/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/babucarr32/react-image-upload.git#readme",
   "publishConfig": {
     "access": "public"
   },

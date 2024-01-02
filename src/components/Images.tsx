@@ -24,7 +24,7 @@ const Images: React.FC<ImagesType> = ({
               <button
                 onClick={() => handleDeleteImage(index)}
                 className={cn(
-                  "absolute top-0 right-0 bg-white opacity-50 hover:opacity-100 transition",
+                  "absolute top-0 right-0 opacity-50 hover:opacity-100 transition",
                   deleteButtonClassName
                 )}
               >

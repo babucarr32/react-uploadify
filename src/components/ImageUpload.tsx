@@ -106,6 +106,7 @@ const ImageUpload: React.FC<ImageUploadType> = ({
           className="w-full h-full flex justify-center items-center"
           quality={quality}
           limit={limit}
+          fileSizeLimit={fileSizeLimit}
           content={
             <Content
               text={text}

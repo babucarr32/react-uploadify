@@ -30,6 +30,7 @@ export interface DetailsType {
 
 export interface UseSelectFileReturnType extends UseImageUploadType {
   setImages: any;
+  reset: () => void;
   setBlobImages: any;
   handleDropFile: (
     ev: any,
@@ -49,6 +50,7 @@ export interface UseSelectFileReturnType extends UseImageUploadType {
 export interface UseImageUploadType {
   images: string[];
   error: ErrorType;
+  reset: () => void;
   blobImages: Blob[];
   isDraggedOver: boolean;
   details: DetailsType[];

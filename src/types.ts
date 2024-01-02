@@ -80,3 +80,13 @@ export type DataType =
       reducedImageQuality: Blob[] | [];
       images: (string | ArrayBuffer | null | undefined)[];
     };
+
+export interface SizeType {
+  kb: number;
+  mb: number;
+}
+
+export interface HandleValidateSizeReturnType {
+  number: number;
+  letters: keyof SizeType;
+}

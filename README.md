@@ -43,6 +43,9 @@ export default {
 }
 ```
 
+> [!NOTE]
+> This package uses [Jotai](https://jotai.org/) for state management. Meaning, if you render a a component(`DragAndDrop`, `ImageSelect`, etc) in component A. You can use the api's provided by the custom hook (`useImageUpload`) in component B directly, without having to pass props.
+
 # Components
 
 ## DragAndDrop
@@ -93,9 +96,26 @@ const MyComponent = () => {
 };
 ```
 
+## Images
+
+The `Images` component displays a preview of the selected images.
+
+Example:
+
+```
+import { Images } from 'react-uploadify';
+
+const MyComponent = () => {
+  return (
+    <Images />
+  );
+};
+```
+
 ## Features
 
 - **Image Preview:** Display a preview of the selected images.
+- **Image Details:** Details about the uploaded image.
 - **Image Quality Reduction:** Allow users to reduce image quality.
 - **File Size Limit:** Set a file size limit for uploaded images in `kb` or `mb`.
 - **Number of Images Limit:** Specify the maximum number of images that can be uploaded.

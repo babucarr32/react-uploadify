@@ -25,19 +25,19 @@ const DragAndDrop: React.FC<DragAndDropType> = ({
 }) => {
   const { handleDropFile } = useSelectFile();
   const [fileLimit, setFileLimit] = useAtom(jotaiFileLimit);
-  const [, setMaxFileSize] = useAtom(jotaiFileSizeLimit);
+  const [maxFileSize, setMaxFileSize] = useAtom(jotaiFileSizeLimit);
   const [, setIsDraggedOver] = useAtom(jotaiIsDraggedOver);
 
   useEffect(() => {
     const handleSetFileLimit = () => limit && setFileLimit(limit);
     handleSetFileLimit();
-  }, []);
+  }, [limit]);
 
   useEffect(() => {
     const handleSetFileSizeLimit = () =>
       fileSizeLimit && setMaxFileSize(fileSizeLimit);
     handleSetFileSizeLimit();
-  }, []);
+  }, [fileSizeLimit]);
 
   return (
     <>
@@ -45,7 +45,7 @@ const DragAndDrop: React.FC<DragAndDropType> = ({
         className={className}
         id="drop_zone"
         onDrop={(e) => (
-          handleDropFile(e, quality, fileLimit), e.preventDefault()
+          handleDropFile(e, quality, fileLimit, maxFileSize), e.preventDefault()
         )}
         onDragOver={(e) => (e.preventDefault(), setIsDraggedOver(true))}
         onDragExit={() => setIsDraggedOver(false)}

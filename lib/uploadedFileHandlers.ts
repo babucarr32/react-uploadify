@@ -1,18 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChangeEvent } from "react";
 
-interface SizeType {
-  kb: number;
-  mb: number;
-}
+import { HandleValidateSizeReturnType, SizeType } from "@/types";
 
-interface HandleValidateSizeReturnType {
-  number: number;
-  letters: keyof SizeType;
-}
-
-const size: SizeType = {
+export const size: SizeType = {
   kb: 1024,
   mb: 1048576,
 };

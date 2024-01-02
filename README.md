@@ -128,6 +128,7 @@ The `useImageUpload` hook exposes the following APIs:
 - **details:** Additional details about the uploaded images.
 - **error:** Error information, if any, during the upload process.
 - **images:** An array of uploaded images.
+- **reset:** A function for resetting the states.
 - **isDraggedOver:** Boolean indicating whether a file is being dragged over the drop area.
 
 Example:

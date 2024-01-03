@@ -1,3 +1,5 @@
+![Screenshot of ReactUploadify](/src/images/imgShot.png)
+
 # Introduction
 
 `ReactUploadify` is a flexible npm package that simplifies the process of uploading images from a user's device to a web browser. It offers a set of components and utilities to manage image uploads effectively within React applications.
